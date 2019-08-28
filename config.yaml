@@ -1,0 +1,15 @@
+Partials:
+    CommaSep: "{{Item}}{{^IsLast}}, {{/IsLast}}"
+Lambdas:
+    Subsection: |
+        <div class="subsection">
+            <h3>{}</h3>
+            <p class="subtitle">{}</p>
+            {}
+        </div>
+    Subsubsection: |
+        <div class="subsubsection">
+            <h4>{}</h4>
+            <p class="subtitle">{}</p>
+            {}
+        </div>

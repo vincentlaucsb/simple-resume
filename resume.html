@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>{{Name}}'s Resume</title>
+    <link href="resume.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a href="http://vincela.com/">
+            <h1 id="name">{{Name}}</h1>
+        </a>
+        <p>
+            <span>{{Address}}</span>
+            <a href="mailto:{{Email}}"><span>{{Email}}</span></a>
+            <span><a href="https://{{LinkedIn}}">{{LinkedIn}}</a></span>
+            <span><a href="http://{{Website}}">{{Website}}</a></span>
+        </p>
+    </header>
+
+    <section>
+        <h2>Work Experience</h2>
+        {{#Experience}}
+        {{#Subsection}}
+            {{Employer}} <span>{{{Date}}}</span> ||
+            {{{Title}}} ||
+            <ul>
+                {{#Responsibilities}}
+                <li>{{Item}}</li>
+                {{/Responsibilities}}
+            </ul>
+        {{/Subsection}}
+        {{/Experience}}
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        {{#Education}}
+        {{#Subsection}}
+        {{Place}} <span>{{{Date}}}</span> ||
+        {{{Degree}}} ||
+        <ul>
+            {{#Items}}
+            <li>{{Item}}</li>{{/Items}}
+        </ul>
+
+        {{#SeniorThesis}}
+        {{#Subsubsection}}
+        <a href="{{GitHub}}">{{Name}}</a> <span>{{#Tech}}{{>CommaSep}}{{/Tech}}</span> ||
+        <a href="{{GitHub}}">{{GitHub}}</a> ||
+        <ul>
+            {{#Items}}
+            <li>{{Item}}</li>
+            {{/Items}}
+        </ul>
+        {{/Subsubsection}}
+        {{/SeniorThesis}}
+        {{/Subsection}}
+        {{/Education}}
+    </section>
+
+    <section>
+        <h2>Technical Skills</h2>
+        <table>
+            {{#Skills}}
+            <tr>
+                <th class="skill-header">{{Category}}</th>
+                <td>{{#Items}}{{>CommaSep}}{{/Items}}</td>
+            </tr>
+            {{/Skills}}
+        </table>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        {{#Projects}}
+        {{#Subsection}}
+        <a href="{{GitHub}}">{{Name}}</a> <span>{{#Tech}}{{>CommaSep}}{{/Tech}}</span> ||
+        <a href="{{GitHub}}">{{GitHub}}</a> ||
+        <ul>
+            {{#Items}}
+            <li>{{Item}}</li>
+            {{/Items}}
+        </ul>
+        {{/Subsection}}
+        {{/Projects}}
+    </section>
+</body>
+</html>
