@@ -138,7 +138,8 @@ class Resume:
 @click.command()
 @click.option("--data", default="resume.yaml", help="Resume data file")
 @click.option("--template", default="resume.html", help="Resume template file")
-def main(data, template):
+@click.option("--config", default="config.yaml", help="Generator configuration options")
+def main(data, template, config):
     mode = None
     if template.split(".")[-1] == 'html':
         mode = Output.HTML
@@ -146,7 +147,7 @@ def main(data, template):
         mode = Output.TEX
 
     generator = Resume(mode)
-    generator.load(template, data, config="config.yaml")
+    generator.load(template, data, config=config)
     print(generator.render())
 
 if __name__ == "__main__":
