@@ -1,3 +1,7 @@
+# Scratch
+test.*
+*.pdf
+
 # IDE
 .vs/
 

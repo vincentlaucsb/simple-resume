@@ -1,10 +1,13 @@
+from enum import Enum
 from functools import partial
 
-import argparse
 import chevron
+import click
 import yaml
 
-# parser = argparse.ArgumentParser(description='Resume generator')
+class Output(Enum):
+    HTML = 1
+    TEX  = 2
 
 '''
 Given the root of a YAML document, find all sequences 
@@ -41,12 +44,8 @@ def process_list_strings(parent: dict):
                     "IsLast": bool(i == len(lst) - 1)
                 }
 
-def process_strings(parent: dict):
+def process_strings(parent: dict, process_func):
     children = [ parent ]
-
-    # Perform string processing actions
-    def new_string(s) -> str:
-        return s.replace("--", "&ndash;")
 
     # Finds strings by performing level-order traversal of YAML
     while children:
@@ -58,7 +57,7 @@ def process_strings(parent: dict):
 
         for k, v in items:
             if type(v) is str:
-                current[k] = new_string(v)
+                current[k] = process_func(v)
             elif type(v) is list or type(v) is dict:
                 children.append(v)
 
@@ -67,16 +66,35 @@ def macro(text: str, render, template: str):
     args = args.split("||")
     return template.format(*args)
 
+def if_not_empty(text: str, render):
+    args = render(text)
+    args = args.split("||")
+    if args[0]:
+        return args[1]
+
+    return ""
+
 class Resume:
-    def __init__(self):
+    def __init__(self, mode: Output):
         self.template = ''
         self.resume = {}
         self.partials = {}
+        self.mode = mode
     
     def load(self, template: str, data: str, config=''):
         self._load_resume_template(template)
         self._load_resume_data(data)
         self._load_resume_config(config)
+        self.resume["IfNotEmpty"] = if_not_empty
+
+    def _get_process_func(self):
+        def new_string_tex(s):
+            return s.replace("#", "\#")
+
+        if self.mode == Output.HTML:
+            return lambda s: s.replace("--", "&ndash;")
+        elif self.mode == Output.TEX:
+            return new_string_tex
 
     def _load_resume_template(self, file: str):
         try:
@@ -89,9 +107,8 @@ class Resume:
         try:
             with open(file, 'r') as infile:
                 self.resume = yaml.safe_load(infile)
-                process_strings(self.resume)
+                process_strings(self.resume, self._get_process_func())
                 process_list_strings(self.resume)
-                print(self.resume)
         except FileNotFoundError:
             print(f'Couldn\'t find resume data file "{file}"')
     
@@ -104,6 +121,7 @@ class Resume:
                 # Load lambdas
                 for k, v in config['Lambdas'].items():
                     self.resume[k] = partial(macro, template=v)
+
         except KeyError:
             # Configuration file is optional
             pass
@@ -117,7 +135,19 @@ class Resume:
             self.resume,
             partials_dict=self.partials)
 
-if __name__ == "__main__":
-    generator = Resume()
-    generator.load("resume.html", "resume.yaml", config="config.yaml")
+@click.command()
+@click.option("--data", default="resume.yaml", help="Resume data file")
+@click.option("--template", default="resume.html", help="Resume template file")
+def main(data, template):
+    mode = None
+    if template.split(".")[-1] == 'html':
+        mode = Output.HTML
+    elif template.split(".")[-1] == "tex":
+        mode = Output.TEX
+
+    generator = Resume(mode)
+    generator.load(template, data, config="config.yaml")
     print(generator.render())
+
+if __name__ == "__main__":
+    main()
