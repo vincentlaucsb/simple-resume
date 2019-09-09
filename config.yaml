@@ -3,6 +3,7 @@ Html:
         '--': '&ndash;'
 Tex:
     Replace:
+        '%': '\%'
         '#': '\#'
 Partials:
     CommaSep: "{{Item}}{{^IsLast}}, {{/IsLast}}"

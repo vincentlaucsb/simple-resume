@@ -2,6 +2,7 @@ Name: Vincent La
 Email: vincela9@gmail.com
 LinkedIn: www.linkedin.com/in/vincent-la-sb
 Website: www.vincela.com
+Mobile: (510) 123-4567
 Experience:
     - Employer: Raytheon Company
       Title: Software Engineer
@@ -16,7 +17,8 @@ Experience:
       Responsibilities:
         - "Tutored fellow students, especially first-generation college students, in math, economics, and statistics"
 Education:
-    - Place: "University of California, Santa Barbara"
+    - School: "University of California, Santa Barbara"
+      Location: "Santa Barbara, CA"
       Date: 2013 -- 2018
       Degree: BA Mathematics
       GPA: 3.3 GPA (Deans List x1)
@@ -32,7 +34,7 @@ Education:
 Skills:
     - Category: Languages
       Items: ['C++', 'C#', 'Java', 'TypeScript/JavaScript', 'Python',
-              'SQL', 'Ruby', 'R', 'CSS/SASS (e.g. this resume)', 'LaTeX', 'Bash scripting', 'Procedural SQL']
+              'SQL', 'Ruby', 'R', 'CSS/SASS', 'LaTeX', 'Bash scripting', 'Procedural SQL']
     - Category: Frameworks
       Items: ['React', 'Ruby on Rails', 'Django', 'Boost', 'Windows Presentation Foundation (WPF)', 'NumPy']
     - Category: Software/OS
@@ -42,6 +44,7 @@ Skills:
 Projects:
     - Name: CSV Parser
       GitHub: https://github.com/vincentlaucsb/csv-parser
+      Notes: [ '97% code coverage', '150 stars' ]
       Tech: [ 'C++', 'CMake', 'gcov', 'Valgrind' ]
       Items:
        - A multi-threaded C++11 CSV parser featuring iterators and ability to parse at over 200MB/s 
@@ -51,7 +54,7 @@ Projects:
       GitHub: https://github.com/vincentlaucsb/Auto-Cost-Calculator
       Tech: [ 'TypeScript', 'ReactJS']
       Items:
-       - Utilized JavaScript/TypeScript and React to create tool to help consumers decide whether or not to buy a new (used) car 
+       - Utilized TypeScript and React to create tool to help consumers decide whether or not to buy a new (used) car 
        - Integrated different JavaScript libraries to implement graphing and drag-and-drop functionality
     - Name: US Commute Times Map
       GitHub: https://github.com/vincentlaucsb/US-Map

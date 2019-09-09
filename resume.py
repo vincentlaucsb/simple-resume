@@ -131,7 +131,6 @@ class Resume:
             for k, v in items:
                 if type(v) is str:
                     current[k] = process(v) # Process the string
-                    print(process(v))
                 elif type(v) is list or type(v) is dict:
                     children.append(v)
     

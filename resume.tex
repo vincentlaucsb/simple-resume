@@ -1,64 +1,148 @@
-% LaTeX file for resume 
-% This file uses the resume document class (res.cls)
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj
+% License : MIT
+%------------------------
 
 {{=<< >>=}}
 
-\documentclass[margin]{res} 
-% the margin option causes section titles to appear to the left of body text 
-\textwidth=5.2in % increase textwidth to get smaller right margin
-%\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
-%\usepackage{newcent}   % uses new century schoolbook postscript font 
-\usepackage{hyperref}
-\usepackage{marginnote}
+\documentclass[letterpaper,11pt]{article}
 
-\begin{document} 
- 
-\name{<<Name>>\\[12pt]} % the \\[12pt] adds a blank line after name
- 
-\address{{\bf Present Address} \\ 204 Pawling Avenue \\ Troy, NY 12180  \\
-        (518) 273-4617 }
-\address{\url{<<Email>>} \\ \url{<<LinkedIn>>} \\ \url{<<Website>>}}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
 
-\begin{resume} 
- 
-<<#Objective>>\section{Objective}<</Objective>>
-<<Objective>>
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeItemSimple}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\href{<<Website>>}{\Large <<Name>>}} & Email : \href{mailto:<<Email>>}{<<Email>>}\\
+  \href{<<Website>>}{<<Website>>} & Mobile : <<Mobile>> \\
+\end{tabular*}
+
+
+%-----------EDUCATION-----------------
 \section{Education}
-<<#Education>>
-<<Degree>>, <<Place>>, <<Date>> \\
-Concentrations in Accounting and Management Systems \\
-<<GPA>>
-<</Education>>
+  \resumeSubHeadingListStart
+  <<#Education>>
+    \resumeSubheading
+      {<<School>>}{<<Location>>}
+      {<<Degree>>;  GPA: <<GPA>>}{<<Date>>}
 
+      % Only created if 
+      \resumeItemListStart
+      <<#Items>>
+        \resumeItemSimple{<<Item>>}
+      <</Items>>
+      \resumeItemListEnd
+  <</Education>>
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------------
 \section{Experience}
-<<#Experience>>
- {\bf <<Title>>,} <<Employer>> \hfill <<Date>>
- \begin{itemize} \itemsep -2pt  % reduce space between items
- <<#Responsibilities>>
- \item <<Item>>
- <</Responsibilities>>
- \end{itemize}
-<</Experience>>
+  \resumeSubHeadingListStart
+  <<#Experience>>
+    \resumeSubheading
+      {<<Employer>>}{<<Location>>}
+      {<<Title>>}{<<Date>>}
+      \resumeItemListStart
+        <<#Responsibilities>>
+        \resumeItemSimple{<<Item>>}
+        <</Responsibilities>>
+      \resumeItemListEnd
+  <</Experience>>
+  \resumeSubHeadingListEnd
 
-% Tabulate Computer Skills; p{4in} defines paragraph 3 inches wide
-\section{Skills}
-  \begin{tabular}{l p{4in}}
-    <<#Skills>>
-    \underline{<<Category>>:} & <<#Items>><<>CommaSep>><</Items>> \\
-    <</Skills>>
-  \end{tabular}
-
+%-----------PROJECTS-----------------
 \section{Projects}
-<<#Projects>>
- {\bf <<Name>>} \hfill <<#Tech>><<>CommaSep>><</Tech>>
- \url{<<GitHub>>}
- \begin{itemize}
- <<#Items>>
- \item <<Item>>
- <</Items>>
- \end{itemize}
-<</Projects>>
+  \resumeSubHeadingListStart
+  <<#Projects>>
+    \resumeSubheading
+      {<<Name>>}{<<#Tech>><<>CommaSep>><</Tech>>}
+      {\href{{<<GitHub>>}}{<<GitHub>>}}{<<#Notes>><<>CommaSep>><</Notes>>}
+      \resumeItemListStart
+        <<#Items>>
+          \resumeItemSimple{<<Item>>}
+        <</Items>>
+      \resumeItemListEnd
+  <</Projects>>
+  \resumeSubHeadingListEnd
 
-\end{resume} 
+%
+%--------PROGRAMMING SKILLS------------
+\section{Programming Skills}
+  \resumeSubHeadingListStart
+  <<#Skills>>
+    \resumeSubItem{<<Category>>}{<<#Items>><<>CommaSep>><</Items>>}
+  <</Skills>>
+  \resumeSubHeadingListEnd
+
+
+
+%-------------------------------------------
 \end{document}
