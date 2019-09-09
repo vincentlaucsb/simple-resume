@@ -44,23 +44,6 @@ def process_list_strings(parent: dict):
                     "IsLast": bool(i == len(lst) - 1)
                 }
 
-def process_strings(parent: dict, process_func):
-    children = [ parent ]
-
-    # Finds strings by performing level-order traversal of YAML
-    while children:
-        current = children.pop()
-        if type(current) is dict:
-            items = current.items()
-        elif type(current) is list:
-            items = enumerate(current)
-
-        for k, v in items:
-            if type(v) is str:
-                current[k] = process_func(v)
-            elif type(v) is list or type(v) is dict:
-                children.append(v)
-
 def macro(text: str, render, template: str):
     args = render(text)
     args = args.split("||")
@@ -77,24 +60,16 @@ def if_not_empty(text: str, render):
 class Resume:
     def __init__(self, mode: Output):
         self.template = ''
+        self.replace = {}
         self.resume = {}
         self.partials = {}
         self.mode = mode
     
     def load(self, template: str, data: str, config=''):
         self._load_resume_template(template)
-        self._load_resume_data(data)
         self._load_resume_config(config)
+        self._load_resume_data(data)
         self.resume["IfNotEmpty"] = if_not_empty
-
-    def _get_process_func(self):
-        def new_string_tex(s):
-            return s.replace("#", "\#")
-
-        if self.mode == Output.HTML:
-            return lambda s: s.replace("--", "&ndash;")
-        elif self.mode == Output.TEX:
-            return new_string_tex
 
     def _load_resume_template(self, file: str):
         try:
@@ -107,7 +82,7 @@ class Resume:
         try:
             with open(file, 'r') as infile:
                 self.resume = yaml.safe_load(infile)
-                process_strings(self.resume, self._get_process_func())
+                self._process_strings(self.resume)
                 process_list_strings(self.resume)
         except FileNotFoundError:
             print(f'Couldn\'t find resume data file "{file}"')
@@ -122,12 +97,42 @@ class Resume:
                 for k, v in config['Lambdas'].items():
                     self.resume[k] = partial(macro, template=v)
 
+                # Load string replacements
+                if self.mode == Output.HTML:
+                    self.replace = config['Html']['Replace']
+                elif self.mode == Output.TEX:
+                    self.replace = config['Tex']['Replace']
+
         except KeyError:
             # Configuration file is optional
             pass
         except FileNotFoundError:
             # Configuration file is optional
             pass
+
+    def _process_strings(self, parent: dict):
+        children = [ parent ]
+
+        def process(value: str) -> str:
+            for k, v in self.replace.items():
+                value = value.replace(k, v)
+
+            return value
+
+        # Finds strings by performing level-order traversal of YAML
+        while children:
+            current = children.pop()
+            if type(current) is dict:
+                items = current.items()
+            elif type(current) is list:
+                items = enumerate(current)
+
+            for k, v in items:
+                if type(v) is str:
+                    current[k] = process(v) # Process the string
+                    print(process(v))
+                elif type(v) is list or type(v) is dict:
+                    children.append(v)
 
     def render(self) -> str:
         return chevron.render(

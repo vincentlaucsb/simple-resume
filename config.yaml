@@ -1,3 +1,9 @@
+Html:
+    Replace:
+        '--': '&ndash;'
+Tex:
+    Replace:
+        '#': '\#'
 Partials:
     CommaSep: "{{Item}}{{^IsLast}}, {{/IsLast}}"
 Lambdas:
