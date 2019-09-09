@@ -44,18 +44,18 @@ def process_list_strings(parent: dict):
                     "IsLast": bool(i == len(lst) - 1)
                 }
 
+# A helper function which allows user-defined macros to be
+# turned into Mustache lambdas
 def macro(text: str, render, template: str):
+    # Process Mustache syntax
     args = render(text)
+
+    # Split rendered tax by "||" and treat each
+    # individual item as a macro argument
     args = args.split("||")
+
+    # Pass arguments into user-defined macro
     return template.format(*args)
-
-def if_not_empty(text: str, render):
-    args = render(text)
-    args = args.split("||")
-    if args[0]:
-        return args[1]
-
-    return ""
 
 class Resume:
     def __init__(self, mode: Output):
@@ -69,7 +69,6 @@ class Resume:
         self._load_resume_template(template)
         self._load_resume_config(config)
         self._load_resume_data(data)
-        self.resume["IfNotEmpty"] = if_not_empty
 
     def _load_resume_template(self, file: str):
         try:
@@ -93,8 +92,8 @@ class Resume:
                 config = yaml.safe_load(infile)
                 self.partials = config['Partials']
 
-                # Load lambdas
-                for k, v in config['Lambdas'].items():
+                # Load macros
+                for k, v in config['Macros'].items():
                     self.resume[k] = partial(macro, template=v)
 
                 # Load string replacements
@@ -102,7 +101,7 @@ class Resume:
                     self.replace = config['Html']['Replace']
                 elif self.mode == Output.TEX:
                     self.replace = config['Tex']['Replace']
-
+                    
         except KeyError:
             # Configuration file is optional
             pass
@@ -110,9 +109,11 @@ class Resume:
             # Configuration file is optional
             pass
 
+    ''' Performs string processing '''
     def _process_strings(self, parent: dict):
         children = [ parent ]
 
+        # Function which processes an individual string
         def process(value: str) -> str:
             for k, v in self.replace.items():
                 value = value.replace(k, v)
@@ -133,7 +134,8 @@ class Resume:
                     print(process(v))
                 elif type(v) is list or type(v) is dict:
                     children.append(v)
-
+    
+    ''' Render the resume '''
     def render(self) -> str:
         return chevron.render(
             self.template,

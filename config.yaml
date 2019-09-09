@@ -6,7 +6,7 @@ Tex:
         '#': '\#'
 Partials:
     CommaSep: "{{Item}}{{^IsLast}}, {{/IsLast}}"
-Lambdas:
+Macros:
     Subsection: |
         <div class="subsection">
             <h3>{}</h3>
