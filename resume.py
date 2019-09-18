@@ -54,6 +54,8 @@ def macro(text: str, render, template: str):
     # individual item as a macro argument
     args = args.split("||")
 
+    # print("Processing", args)
+
     # Pass arguments into user-defined macro
     return template.format(*args)
 
@@ -80,7 +82,12 @@ class Resume:
     def _load_resume_data(self, file: str):
         try:
             with open(file, 'r') as infile:
+                # Copy resume macros
+                temp = self.resume
                 self.resume = yaml.safe_load(infile)
+                for k, v in temp.items():
+                    self.resume[k] = temp[k]
+
                 self._process_strings(self.resume)
                 process_list_strings(self.resume)
         except FileNotFoundError:
@@ -94,6 +101,7 @@ class Resume:
 
                 # Load macros
                 for k, v in config['Macros'].items():
+                    # print(f"Loaded macro {k}", v)
                     self.resume[k] = partial(macro, template=v)
 
                 # Load string replacements
@@ -136,6 +144,8 @@ class Resume:
     
     ''' Render the resume '''
     def render(self) -> str:
+        # print(self.resume)
+
         return chevron.render(
             self.template,
             self.resume,
