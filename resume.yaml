@@ -1,63 +1,40 @@
-Name: Vincent La
-Email: vincela9@gmail.com
-LinkedIn: www.linkedin.com/in/vincent-la-sb
-Website: www.vincela.com
-Mobile: (510) 123-4567
+Name: Alfred E. Neuman
+Email: alfred@neuman.com
+LinkedIn: www.linkedin.com/in/alfred-e-neuman
+Website: www.alfredneuman.com
+Mobile: (310) 123-4567
 Experience:
-    - Employer: Raytheon Company
-      Title: Software Engineer
-      Date: January 2019
+    - Employer: Microsoft Corporation
+      Title: Software Engineer -- Mobile
+      Date: 2011 -- 2017
       Responsibilities:
-        - "Refactored code, fixed bugs, and created design documents"
-        - Rewrote most of a key plugin to be faster and maintainable; resolved thread deadlocks
-        - Designed and implemented embedded C++ software responsible for communicating between different hardware
-    - Employer: ONDAS Student Center
-      Title: "Peer Tutor -- University of California, Santa Barbara"
-      Date: Winter -- Spring 2017
+        - Developed and tested default apps bundled with mobile Windows operating systems
+        - Oversaw Windows-powered phones climb from 10% to 60% of US market share
+    - Employer: MAD Magazine
+      Title: Mascot
+      Date: 1954 -- Present
       Responsibilities:
-        - "Tutored fellow students, especially first-generation college students, in math, economics, and statistics"
+        - Was the face one of the largest American comedy magazines in circulation
 Education:
-    - School: "University of California, Santa Barbara"
-      Location: "Santa Barbara, CA"
-      Date: 2013 -- 2018
-      Degree: BA Mathematics
-      GPA: 3.3 GPA (Deans List x1)
-      SeniorThesis:
-        Name: "Dots and Lines: A Survey of Graph Drawing Algorithms"
-        GitHub: https://github.com/vincentlaucsb/Graph-Drawing
-        Items:
-            - "Independently researched and implemented several drawing algorithms in C++ using the Stanford Network Analysis Project, Eigen, and GNU Linear Programming Kit"
-            - Programmed animations of algorithms using vector graphics and wrote several original proofs 
+    - School: "Sometown State University"
+      Location: "Anytown, California"
+      Date: 2011
+      Degree: BS Computer Engineering
+      GPA: 4.0
       Items:
-        - "Computer Science Coursework (upper division): data structures and algorithms, database management systems, teaching computing science"
-        - Minor in Statistical Science including graduate data mining and time series analysis
+        - "Minored in Underwater Basket Weaving and Interpretive Dance"
 Skills:
     - Category: Languages
-      Items: ['C++', 'C#', 'Java', 'TypeScript/JavaScript', 'Python',
-              'SQL', 'Ruby', 'R', 'CSS/SASS', 'LaTeX', 'Bash scripting', 'Procedural SQL']
-    - Category: Frameworks
-      Items: ['React', 'Ruby on Rails', 'Django', 'Boost', 'Windows Presentation Foundation (WPF)', 'NumPy']
-    - Category: Software/OS
-      Items: ['Visual Studio', 'IntelliJ', 'MySQL', 'PostgreSQL', 'Git', 'CMake', 'Subversion', 'Makefile', 'Nginx', 'Windows', 'Linux', 'Mac']
+      Items: ['Ruby', 'PHP', 'Java', 'Matlab', 'Brainfuck']
+    - Category: Software
+      Items: ['Ruby on Rails', 'Eclipse IDE', 'Jenkins']
     - Category: Concepts
-      Items: ['Agile/Scrum', 'Software Profiling and Optimization', 'Machine Learning', 'Data Visualization', 'Test Automation', 'Object-Oriented Design', 'Embedded/Cross-Platform Development', 'Web Development', 'Database Design' ]
+      Items: ['Object-Oriented Programming', 'Agile', 'SCRUM', 'Kanban', 'Waterfall' ]
 Projects:
-    - Name: CSV Parser
-      GitHub: https://github.com/vincentlaucsb/csv-parser
-      Notes: [ '97% code coverage', '150 stars' ]
-      Tech: [ 'C++', 'CMake', 'gcov', 'Valgrind' ]
+    - Name: Wallow
+      GitHub: https://github.com/alfredneuman/wallow
+      Notes: [ 'Featured in school newspaper' ]
+      Tech: [ 'Linux', 'Apache', 'MySQL', 'PHP' ]
       Items:
-       - A multi-threaded C++11 CSV parser featuring iterators and ability to parse at over 200MB/s 
-       - Was solely responsible for all aspects of software development from design to implementation and testing 
-       - "Utilized continuous integration services to ensure cross-platform, cross-compiler compatibility"
-    - Name: Auto Cost Calculator
-      GitHub: https://github.com/vincentlaucsb/Auto-Cost-Calculator
-      Tech: [ 'TypeScript', 'ReactJS']
-      Items:
-       - Utilized TypeScript and React to create tool to help consumers decide whether or not to buy a new (used) car 
-       - Integrated different JavaScript libraries to implement graphing and drag-and-drop functionality
-    - Name: US Commute Times Map
-      GitHub: https://github.com/vincentlaucsb/US-Map
-      Tech: [ 'leaftlet.js', 'd3.js', 'PostgreSQL', 'Python']
-      Items:
-       - Combined geographic and Census demographic data to create an interactive web map
+       - Created a "hot or not" collegiate social networking site
+       - Ran a server cluster located in the closet of my college dorm room

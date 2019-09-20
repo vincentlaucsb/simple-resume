@@ -2,17 +2,22 @@
 A simple Python resume YAML generator using Mustache templates
 
 ## Motivation
-I wanted to be able to save my resume in a readable data format but spin off multiple variants--based on different information and templates--easily.
+I wanted to be able to save my resume in a readable data format and quickly convert that to an HTML or Tex document.
+I saw many existing examples om GitHub and around the internet, but I thought many of them were more cute than practical.
 
 ## Usage
+This generator consists of a single short Python script that you can modify. Before using it,
+install the preqs by typing
+
+`pip install -r requirements.txt`
+
 ```
-resume --help
 Usage: resume.py [OPTIONS]
 
 Options:
-  --data TEXT      Resume data file
-  --template TEXT  Resume template file
-  --config TEXT    Generator configuration options
+  --data TEXT      Resume data file (default: 'resume.yaml')
+  --template TEXT  Resume template file (default: 'resume.html')
+  --config TEXT    Optional configuration options (default: 'config.yaml')
   --help           Show this message and exit.
 ```
 
@@ -22,33 +27,6 @@ This resume generator processes YAML files and [Mustache templates](http://musta
 This repo contains some sample templates that you can copy and modify:
  * [HTML](/html)
  * [LaTeX](/tex)
-
-### Iterating over lists containing strings
-One issue I found with using Mustache to generate resumes was rendering lists of strings, since there was not a syntax to access the string inside the list. Furthermore, in some instances, I wanted to know if a string was the last item in a list. As a result, this resume generator processes YAML before as such:
-
-```yaml
-Responsibilities:
-  - "Refactored code, fixed bugs, and created design documents"
-  - Rewrote most of a key plugin to be faster and maintainable; resolved thread deadlocks
-  - Designed and implemented embedded C++ software responsible for communicating between different hardware
-```
-
-```python
-{
-  "Responsibilities":
-    [
-      "Order": 0,
-      "Item": "Refactored code, fixed bugs, and created design documents"
-      "IsLast": false
-    ],
-    [ ... ],
-    [
-      "Order": 2,
-      "Item": "Designed and implemented embedded C++ software responsible for communicating between different hardware",
-      "IsLast": true
-    ]
-}
-```
 
 ### A Simple Example
 Here's a simple example of a YAML resume file and a corresponding template that pulls in data from that file.
@@ -76,7 +54,7 @@ Superpowers:
     - 10x Programmer
     - Thought Leader
     - Synergy Promoter
-    - Agile/SCRUM Grand Wizard
+    - Agile/SCRUM Archmage
     - Rockstar Ninja
     - COBOL Programming
 ```
@@ -101,6 +79,51 @@ Superpowers:
 ```
 
 </td></tr>
+</tbody>
+</table>
+
+
+### Iterating over lists containing strings
+One issue I found with using Mustache to generate resumes was rendering lists of strings, since there was not a syntax to access the string inside the list. Furthermore, in some instances, I wanted to know if a string was the last item in a list.
+Hence, this resume generator performs some processing on the YAML as follows:
+
+<table>
+<thead>
+<th>Before</th>
+<th>After</th>
+</thead>
+<tbody>
+<tr>
+<td>
+
+```yaml
+Responsibilities:
+  - "Refactored code, fixed bugs, and created design documents"
+  - Rewrote most of a key plugin to be faster and maintainable; resolved thread deadlocks
+  - Designed and implemented embedded C++ software responsible for communicating between different hardware
+```
+
+</td>
+<td>
+
+```python
+{
+  "Responsibilities":
+    [
+      "Order": 0,
+      "Item": "Refactored code, fixed bugs, and created design documents"
+      "IsLast": false
+    ],
+    [ ... ],
+    [
+      "Order": 2,
+      "Item": "Designed and implemented embedded C++ software responsible for communicating between different hardware",
+      "IsLast": true
+    ]
+}
+```
+
+</td>
 </tbody>
 </table>
 

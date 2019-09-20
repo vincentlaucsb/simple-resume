@@ -5,10 +5,6 @@ import chevron
 import click
 import yaml
 
-class Output(Enum):
-    HTML = 1
-    TEX  = 2
-
 '''
 Given the root of a YAML document, find all sequences 
 of strings and replace the individual strings with a mapping
@@ -60,7 +56,7 @@ def macro(text: str, render, template: str):
     return template.format(*args)
 
 class Resume:
-    def __init__(self, mode: Output):
+    def __init__(self, mode: str):
         self.template = ''
         self.replace = {}
         self.resume = {}
@@ -105,11 +101,12 @@ class Resume:
                     self.resume[k] = partial(macro, template=v)
 
                 # Load string replacements
-                if self.mode == Output.HTML:
-                    self.replace = config['Html']['Replace']
-                elif self.mode == Output.TEX:
-                    self.replace = config['Tex']['Replace']
-                    
+                for k, v in config.items():
+
+                    # File extensions are case-insensitive
+                    if self.mode.lower() == k.lower():
+                        self.replace = config[k]['Replace']
+
         except KeyError:
             # Configuration file is optional
             pass
@@ -152,17 +149,13 @@ class Resume:
             partials_dict=self.partials)
 
 @click.command()
-@click.option("--data", default="resume.yaml", help="Resume data file")
-@click.option("--template", default="resume.html", help="Resume template file")
-@click.option("--config", default="config.yaml", help="Generator configuration options")
+@click.option("--data", default="resume.yaml", help="Resume data file (default: 'resume.yaml')")
+@click.option("--template", default="resume.html", help="Resume template file (default: 'resume.html')")
+@click.option("--config", default="config.yaml", help="Optional configuration options (default: 'config.yaml')")
 def main(data, template, config):
-    mode = None
-    if template.split(".")[-1] == 'html':
-        mode = Output.HTML
-    elif template.split(".")[-1] == "tex":
-        mode = Output.TEX
+    file_ext = template.split(".")[-1]
 
-    generator = Resume(mode)
+    generator = Resume(file_ext)
     generator.load(template, data, config=config)
     print(generator.render())
 
