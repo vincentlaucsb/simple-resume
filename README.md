@@ -1,6 +1,9 @@
 # simple-resume
 A simple Python resume YAML generator using Mustache templates
 
+## Motivation
+I wanted to be able to save my resume in a readable data format but spin off multiple variants--based on different information and templates--easily.
+
 ## Usage
 ```
 resume --help
@@ -15,6 +18,10 @@ Options:
 
 ## Set Up
 This resume generator processes YAML files and [Mustache templates](http://mustache.github.io/mustache.5.html) to create your final product.
+
+This repo contains some sample templates that you can copy and modify:
+ * [HTML](/html)
+ * [LaTeX](/tex)
 
 ### Iterating over lists containing strings
 One issue I found with using Mustache to generate resumes was rendering lists of strings, since there was not a syntax to access the string inside the list. Furthermore, in some instances, I wanted to know if a string was the last item in a list. As a result, this resume generator processes YAML before as such:
@@ -34,7 +41,7 @@ Responsibilities:
       "Item": "Refactored code, fixed bugs, and created design documents"
       "IsLast": false
     ],
-    ...
+    [ ... ],
     [
       "Order": 2,
       "Item": "Designed and implemented embedded C++ software responsible for communicating between different hardware",
@@ -44,6 +51,7 @@ Responsibilities:
 ```
 
 ### A Simple Example
+Here's a simple example of a YAML resume file and a corresponding template that pulls in data from that file.
 
 <table>
   <thead>
@@ -103,7 +111,7 @@ In addition to a resume data file, you can also specify an optional configuratio
  * Define your own macros
  
 #### Custom Macros
-Macros in this resume generator are similar to macros in C and Latex. They act like Mustache partials, but allow you to specify exactly what arguments you want by separating them with two pipes.
+Macros in this resume generator are similar to macros in C and Latex. They act like Mustache partials, but allow you to specify exactly what arguments you want by separating them with two pipes. `{}` should be used as placeholders for arguments.
 
 ```yaml
 Macros:
