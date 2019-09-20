@@ -107,7 +107,7 @@ Superpowers:
 ### `config.yaml`: Extensions to Mustache
 In addition to a resume data file, you can also specify an optional configuration file (by default, is is `config.yaml`). This allows you to:
  * Define replacements for text sequences, i.e. replacing `--` with `&ndash;` for HTML documents or `%` with `\%` for Tex.
- * Define your own (partials)[http://mustache.github.io/mustache.5.html#Partials]
+ * Define your own [partials](http://mustache.github.io/mustache.5.html#Partials)
  * Define your own macros
  
 #### Custom Macros
