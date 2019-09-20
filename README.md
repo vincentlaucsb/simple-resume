@@ -4,6 +4,7 @@ A simple Python resume YAML generator using Mustache templates
 ## Motivation
 I wanted to be able to save my resume in a readable data format and quickly convert that to an HTML or Tex document.
 I saw many existing examples om GitHub and around the internet, but I thought many of them were more cute than practical.
+I was really inspired by the simplicity of [The Markdown Resume](https://mszep.github.io/pandoc_resume/), but I thought that maybe Markdown was a little *too* simple for the purposes of resumes and CVs.
 
 ## Usage
 This generator consists of a single short Python script that you can modify. Before using it,
