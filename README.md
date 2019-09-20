@@ -44,47 +44,57 @@ Responsibilities:
 ```
 
 ### A Simple Example
-That means given
 
+<table>
+  <thead>
+    <th>YAML</th>
+    <th>Template</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td>
+    
 ```yaml
-Name: Vincent La
-Email: vincela9@gmail.com
-LinkedIn: www.linkedin.com/in/vincent-la-sb
-Website: www.vincela.com
+Name: A. A. Ron Rodgers
+Email: ...
+LinkedIn: ...
+Website: http://www.packers.com/
 Mobile: (510) 123-4567
 Experience:
-    - Employer: XYZ Corp
+    - Employer: GB Packing Corp
       Title: Software Engineer
-      Date: January 2019
-Skills: [ "10x Programmer", "Thought Leader", "Synergy Promoter", "Agile/SCRUM Grand Wizard", "Rockstar Ninja", "COBOL Programming" ]
+      Date: August 2005 -- Present
+Superpowers: 
+    - 10x Programmer
+    - Thought Leader
+    - Synergy Promoter
+    - Agile/SCRUM Grand Wizard
+    - Rockstar Ninja
+    - COBOL Programming
 ```
 
-and
+</td><td>
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{Name}}'s Resume</title>
-</head>
-<body>
-  <header>
-      <h1 id="name"><a href="http://{{Website}}">{{Name}}</a></h1>
-      <p>
-          <span>{{Address}}</span>
-          <a href="mailto:{{Email}}"><span>{{Email}}</span></a>
-          <span><a href="https://{{LinkedIn}}">{{LinkedIn}}</a></span>
-          <span><a href="http://{{Website}}">{{Website}}</a></span>
-      </p>
-  </header>
-  <ul>
-    {{#Skills}}
-      <li>{{Item}}</li>
-    {{/Skills}}
-  </ul>
-</body>
-</html>
+<header>
+    <h1 id="name"><a href="http://{{Website}}">{{Name}}</a></h1>
+    <p>
+        <span>{{Address}}</span>
+        <a href="mailto:{{Email}}"><span>{{Email}}</span></a>
+        <span><a href="https://{{LinkedIn}}">{{LinkedIn}}</a></span>
+        <span><a href="http://{{Website}}">{{Website}}</a></span>
+    </p>
+</header>
+<ul>
+  {{#Superpowers}}
+    <li>{{Item}}</li>
+  {{/Superpowers}}
+</ul>
 ```
+
+</td></tr>
+</tbody>
+</table>
 
 ### `config.yaml`: Extensions to Mustache
 In addition to a resume data file, you can also specify an optional configuration file (by default, is is `config.yaml`). This allows you to:
